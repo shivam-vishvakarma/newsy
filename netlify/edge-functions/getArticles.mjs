@@ -4,7 +4,9 @@ export default async function (req, context) {
   const response = await context.next();
   const html = await response.text();
   const category = new URL(req.url).searchParams.get("category");
-  let url = `https://news-api14.p.rapidapi.com/v2/search/articles?query=${context.geo.city}&language=en`;
+  const search = new URL(req.url).searchParams.get("search");
+  const query = search ? search : context.geo.city;
+  let url = `https://news-api14.p.rapidapi.com/v2/search/articles?query=${query}&language=en&country=${context.geo.country.code}`;
   if (category) {
     url = `https://news-api14.p.rapidapi.com/v2/trendings?topic=${category}&language=en&country=${context.geo.country.code}`;
   }
@@ -23,6 +25,11 @@ export default async function (req, context) {
     const data = await res.json();
 
     const document = new DOMParser().parseFromString(html, "text/html");
+    if (category) {
+      document.querySelector("title").innerText = category.charAt(0).toUpperCase() + category.substring(1) + " | Newsy | Daily News Updates | Latest Fresh News | Newsy";
+    } else if(search) {
+      document.querySelector("title").innerText = `Search: ${search} | Newsy | Daily News Updates | Latest Fresh News | Newsy`;
+    }
     const articleContainer = document.querySelector("article").parentNode;
 
     // throwing not found if there is any error

@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Newsy | Article</title>
+    <link rel="shortcut icon" href="/assets/logo.ico" type="image/x-icon">
+    <title>Home | Daily News Updates | Latest Fresh News | Newsy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
@@ -11,7 +12,6 @@
     />
     <script>
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
             colors: {
@@ -69,35 +69,120 @@
         },
       };
     </script>
+    <style>
+        #articleContent figure{
+            float: inline-start;
+        }
+        #articleContent figcaption{
+            text-align: center;
+        }
+        #articleContent p{
+            text-align: justify;
+            margin: 1rem 0;
+        }
+        #articleContent a{
+            position: relative;
+            color: #3b82f6;
+            text-decoration: none;
+            transition: all 0.5s ease;
+        }
+
+        #articleContent h4{
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        #articleContent article:has(span>figure) span{
+            display: flex;
+            justify-content: start;
+            gap: 2rem;
+            align-items: center;
+            padding: 1rem;
+            width: 100%;
+            height: max-content;
+        }
+        #articleContent article:has(span>figure) span figure{
+            width: 20%;
+        }
+        #articleContent article:has(span>figure) span p{
+            width: 80%;
+        }
+    </style>
   </head>
-  <body>
+  <body class="bg-white dark:bg-gray-900 dark:text-white">
     <header>
-      <nav
-        class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
-      >
+      <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed left-0 right-0 top-0">
         <div
           class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
         >
           <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="/assets/logo.jpeg" class="h-8 rounded-full" alt="Logo" />
             <span
               class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
               >Newsy</span
             >
           </a>
-          <div
-            class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-          >
+          <div class="flex md:order-2">
             <button
               type="button"
-              class="text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              data-collapse-toggle="navbar-search"
+              aria-controls="navbar-search"
+              aria-expanded="false"
+              class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1"
             >
-              Log Out
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+              <span class="sr-only">Search</span>
             </button>
+            <div class="relative hidden md:block">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+                <span class="sr-only">Search icon</span>
+              </div>
+              <form action="/articles" method="get">
+                <input
+                  type="search"
+                  id="search-navbar"
+                  name="search"
+                  class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search..."
+                />
+              </form>
+            </div>
             <button
-              data-collapse-toggle="navbar-sticky"
+              data-collapse-toggle="navbar-search"
               type="button"
               class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-sticky"
+              aria-controls="navbar-search"
               aria-expanded="false"
             >
               <span class="sr-only">Open main menu</span>
@@ -120,15 +205,45 @@
           </div>
           <div
             class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-            id="navbar-sticky"
+            id="navbar-search"
           >
+            <div class="relative mt-3 md:hidden">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <form action="/articles" method="get">
+                <input
+                  type="search"
+                  id="search-navbar"
+                  name="search"
+                  class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search..."
+                />
+              </form>
+            </div>
             <ul
               class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
             >
               <li>
                 <a
                   href="/"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                   aria-current="page"
                   >Home</a
                 >
@@ -136,21 +251,21 @@
               <li>
                 <a
                   href="/categories"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >Categories</a
                 >
               </li>
               <li>
                 <a
                   href="/articles"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  >Articles</a
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >Fresh News</a
                 >
               </li>
               <li>
                 <a
                   href="/contact"
-                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >Contact</a
                 >
               </li>
@@ -159,34 +274,43 @@
         </div>
       </nav>
     </header>
-    <main class="pt-16 p-4">
+    <main class="pt-16 p-4 bg-white dark:bg-gray-900">
       <div class="max-w-screen-xl lg:w-2/3 mx-auto p-4">
         <div class="flex flex-wrap items-center justify-between mb-4">
-          <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
-            Article Title
+          <h1
+            id="title"
+            class="text-3xl font-semibold text-gray-900 dark:text-white"
+          >
+            YouTube invites users to test its community notes feature
           </h1>
           <div class="flex items-center space-x-2">
             <span class="text-gray-500 dark:text-gray-400">Published on</span>
-            <time datetime="2024-01-01" class="text-gray-500 dark:text-gray-400"
-              >January 1, 2024</time
+            <time
+              id="timePublished"
+              datetime="2024-01-01"
+              class="text-gray-500 dark:text-gray-400"
+              >2024-07-27T12:00:00.000Z</time
             >
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-between mb-4">
           <div class="flex items-center space-x-2">
             <img
-              src="./assets/dp1.png"
+              id="publisherAvtar"
+              src="https://s.yimg.com/cv/apiv2/default/fp/20180826/icons/favicon_y19_32x32.ico"
               alt="Author"
               class="w-10 h-10 rounded-full"
             />
             <div>
-              <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-                Author Name
+              <h2
+                id="publisherName"
+                class="text-lg font-semibold text-gray-900 dark:text-white"
+              >
+                Yahoo Finance
               </h2>
-              <span class="text-gray-500 dark:text-gray-400">Author Bio</span>
             </div>
           </div>
-          <div class="flex items-center space-x-2">
+          <!-- <div class="flex items-center space-x-2">
             <button
               type="button"
               class="text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -199,41 +323,426 @@
             >
               Message
             </button>
-          </div>
+          </div> -->
         </div>
         <img
-          src="./assets/article.png"
+          id="articleImage"
+          src="https://s.yimg.com/os/creatr-uploaded-images/2024-08/727c8140-550e-11ef-bfbe-96294aade359"
           alt="Article Image"
-          class="w-full h-96 object-cover rounded-lg my-4"
+          class="w-full aspect-video object-cover rounded-lg my-4"
         />
-        <div class="prose dark:prose-dark">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+        <div id="articleContent" class="prose dark:prose-dark text-justify">
+          <div>
+            <div>
+              <div id="Masterwrap">
+                <main role="main">
+                  <div
+                    data-assets="[]"
+                    data-device="desktop"
+                    data-i18n='{"{date} at {time}":"{date} at {time}","{0} hr ago":"{0} hr ago","{0} min ago":"{0} min ago","{0} mins ago":"{0} mins ago","{0} Views":"{0} views","INLINE_CONSENT_BLOCKED_3P_BUTTON_ALLOW":"Allow","LESS":"Less","LIVE_IS_OVER":"LIVE COVERAGE IS OVER","LOADING":"Loading","MORE":"More","NEW_UPDATE":"new update","NEW_UPDATES":"new updates","JUST_NOW":"Just now","RELOAD":"Click to reload with the latest updates","SEE {0} MORE":"See {0} more","SEE_LESS":"See less","SEE_MORE":"See more","SHOW_MORE":"Show more updates","TODAY":"Today","UPDATE":"update","UPDATES":"updates","VIDEO_A11Y_DISABLE_FULLSCREEN":"Full screen, button, disabled, temporarily not available for screen reader users"}'
+                    data-lang="en-AU"
+                    data-tz="Europe/London"
+                    data-params='{"features":{"allowSendingDomainPathToNCP":true,"editorialUpsells":true,"enableAdSlotsOneSlot":true,"enableGAMAds":true,"enableGAMMomentsAds":true,"enableInArticleAd":true,"enableNRU":true,"enableOlympicMedalCount":true,"enableVideoDocking":true,"enableXrayEntityAboutFacts":true,"enableXrayNcp":true,"enableXrayTickerEntities":true,"filterNonGdprEmbeds":true,"liveBlogPolling":true,"noRapidClickClass":true,"outStream":true},"config":{"authorBylineCollapseLineCount":2,"commerceQuickOverviewLimit":5,"freezeOnLinkClick":true,"isAffilimateTest":false,"lazyOffsetY":1300,"livecoverage":{"defer":false},"imageCaptionCollapseLineCount":3,"slideshowCaptionCollapseLineCount":2,"uiShowPreviousButtonOnLoad":true,"prestigeScrollMarginTop":-72}}'
+                    data-space-id="1183800001"
+                    id="caas-content-body"
+                  >
+                    <article role="article" tabindex="-1">
+                      <div
+                        data-wf-sticky-target=".caas-share-buttons"
+                        data-wf-sticky-offset="165px 10px"
+                        data-wf-sticky-boundary="caas-body-section"
+                      >
+                        <div>
+                          <figure>
+                            <div>
+                              <p>
+                                <img
+                                  src="https://s.yimg.com/ny/api/res/1.2/rxCCls6aI3vTfi92z70wNw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY3OQ--/https://s.yimg.com/os/creatr-uploaded-images/2024-08/727c8140-550e-11ef-bfbe-96294aade359"
+                                  fetchPriority="high"
+                                  data-src="https://s.yimg.com/ny/api/res/1.2/rxCCls6aI3vTfi92z70wNw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY3OQ--/https://s.yimg.com/os/creatr-uploaded-images/2024-08/727c8140-550e-11ef-bfbe-96294aade359"
+                                />
+                              </p>
+                            </div>
+                            <p>
+                              <figcaption><span> YouTube</span></figcaption>
+                            </p>
+                          </figure>
+                        </div>
+                        <div>
+                          <p>
+                            YouTube seems to be starting to roll out its
+                            community notes feature to a select group of users.
+                            Screenshots of YouTube’s official invitation to join
+                            the pilot program for its new community correction
+                            feature are popping up all over social media,
+                            according to
+                            <a
+                              data-i13n="cpos:1;pos:1"
+                              href="https://9to5google.com/2024/08/07/youtube-community-notes-test-pilot-program/"
+                              rel="nofollow noopener"
+                              target="_blank"
+                              data-ylk="slk:9to5Google;cpos:1;pos:1;elm:context_link;itc:0;sec:content-canvas"
+                              ><em>9to5Google</em></a
+                            >.
+                          </p>
+                          <p>
+                            YouTube first announced its
+                            <a
+                              data-i13n="cpos:2;pos:1"
+                              href="https://www.engadget.com/youtubes-community-notes-feature-rips-a-page-out-of-xs-playbook-162145673.html"
+                              data-ylk="slk:community notes feature;cpos:2;pos:1;elm:context_link;itc:0;sec:content-canvas"
+                              >community notes feature</a
+                            >
+                            in June. The new feature allows viewers to submit
+                            short blurbs that provide additional context or
+                            correct information to certain video content. The
+                            community notes feature comes ahead of the US
+                            presidential election.
+                          </p>
+                          <p>
+                            There is no official start date for the new feature,
+                            but YouTube has added a section to
+                            <a
+                              data-i13n="cpos:3;pos:1"
+                              href="https://support.google.com/youtube/answer/14925346"
+                              rel="nofollow noopener"
+                              target="_blank"
+                              data-ylk="slk:its “Help” database;cpos:3;pos:1;elm:context_link;itc:0;sec:content-canvas"
+                              >its “Help” database</a
+                            >
+                            with instructions on writing and submitting notes.
+                            We’ve also reached out to Google for a comment on
+                            the new feature.
+                          </p>
+                          <p>
+                            The pilot program is currently only available in
+                            English for mobile devices in the US, according to
+                            the support page. The company previously said it
+                            would invite participants through email or their
+                            Creator Studios account. The select group of test
+                            subjects will provide feedback to YouTube to help
+                            the platform determine which notes are “helpful,”
+                            “somewhat helpful” or “unhelpful,” before rolling
+                            out its community notes feature to the public,
+                            according to
+                            <a
+                              data-i13n="cpos:4;pos:1"
+                              href="https://blog.youtube/news-and-events/new-ways-to-offer-viewers-more-context/"
+                              rel="nofollow noopener"
+                              target="_blank"
+                              data-ylk="slk:the official YouTube blog;cpos:4;pos:1;elm:context_link;itc:0;sec:content-canvas"
+                              >the official YouTube blog</a
+                            >.
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </main>
+              </div>
+              <div>
+                <main role="main">
+                  <div
+                    id="module-moreStories"
+                    data-wf-sticky-offset="130px 10px"
+                    data-wf-sticky-position=""
+                    data-wf-sticky-target="#adsStream"
+                    data-wf-trigger-percentage=""
+                  >
+                    <ul>
+                      <li></li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/xXsObrpP8ifmw_iZKSouLA--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/evening_standard_239/304cff14ded684fa47d11c3a3a2f30a4"
+                              alt=""
+                            />
+                          </p>
+                          <div>
+                            <p><span>Evening Standard</span></p>
+                            <h4>
+                              <a
+                                data-uuid="6f96949b-2fcd-3337-ab50-a8c3dabed92c"
+                                href="https://au.finance.yahoo.com/news/deliveroo-posts-first-ever-profit-062237050.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:3;ct:story;g:6f96949b-2fcd-3337-ab50-a8c3dabed92c"
+                                data-hosted-type="HOSTED"
+                                >Deliveroo shares jump as it posts first ever
+                                profit</a
+                              >
+                            </h4>
+                            <p>
+                              Deliveroo today reported its first ever profit in
+                              a major milestone for the London-based business
+                              three years after its troubled IPO. The firm’s
+                              interim results showed a small profit of £1.3
+                              million for the first six months of 2024, turning
+                              round a first-half loss of £82.9 million for the
+                              previous year, as well as its first period of cash
+                              flow positivity. “We’ve seen that we can improve
+                              profitability as we’re growing,” Shu said, adding:
+                              “We see less headwinds in the consumer markets.”
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/3vzuxljDiqEAKPImAn25nw--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/ap_finance_articles_694/a1a2ae8d6a1e6a78aa6238320c62e4d8"
+                              alt=""
+                            />
+                          </p>
+                          <div>
+                            <p><span>Associated Press Finance</span></p>
+                            <h4>
+                              <a
+                                data-uuid="5b36e928-36e5-33ed-937f-d25258aede29"
+                                href="https://au.finance.yahoo.com/news/taylor-swift-fans-devastated-canceled-091647210.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:5;ct:story;g:5b36e928-36e5-33ed-937f-d25258aede29"
+                                data-hosted-type="HOSTED"
+                                >Taylor Swift fans are devastated by canceled
+                                Eras Tour shows in Austria</a
+                              >
+                            </h4>
+                            <p>
+                              Fans of Taylor Swift are devastated by the
+                              cancellations of three sold-out Eras Tour shows in
+                              Austria after authorities foiled an apparent plot
+                              for an attack in Vienna. Fans, known as Swifties,
+                              took to social media to express their devastation
+                              at missing out on one of the superstar’s shows.
+                              Annmarie Timmins, a journalist who traveled from
+                              the United States for Thursday’s show, said she
+                              and her husband were waiting for the subway after
+                              dinner when they heard the news.
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p><span>GlobeNewswire</span></p>
+                          <h4>
+                            <a
+                              data-uuid="72400bad-b355-33d2-9c32-3a04918bdbea"
+                              href="https://au.finance.yahoo.com/news/enchanting-grasslands-celebrate-traditional-naadam-091600731.html"
+                              data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:8;ct:story;g:72400bad-b355-33d2-9c32-3a04918bdbea"
+                              data-hosted-type="HOSTED"
+                              >Enchanting Grasslands Celebrate with Traditional
+                              Naadam: Hinggan League, Inner Mongolia Draws
+                              Tourists from Near and Far</a
+                            >
+                          </h4>
+                          <p>
+                            HINGGAN LEAGUE, China, Aug. 08, 2024 (GLOBE
+                            NEWSWIRE) -- The melodies of Inner Mongolia come
+                            alive during the Naadam Festival. On August 8, the
+                            2024 Hinggan League Naadam Festival kicked off in
+                            Ulan Maodu Sumu, Horqin Right Front Banner, Inner
+                            Mongolia. Tens of thousands of visitors from around
+                            the globe converged on the grasslands to partake in
+                            this vibrant cultural and tourism event. A Media
+                            Snippet accompanying this announcement is available
+                            by clicking on this link According to the Organizin
+                          </p>
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/RzY4ZC9iSVJ1BeW1vSBp1A--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/globenewswire.com/126701f5cee4de30b1276a80cff0fcbe"
+                              alt=""
+                            />
+                          </p>
+                          <div>
+                            <p><span>GlobeNewswire</span></p>
+                            <h4>
+                              <a
+                                data-uuid="ed80895b-579b-3666-8e61-2f5ace73910b"
+                                href="https://au.finance.yahoo.com/news/battery-testing-inspection-certification-tic-091600134.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:9;ct:story;g:ed80895b-579b-3666-8e61-2f5ace73910b"
+                                data-hosted-type="HOSTED"
+                                >Battery Testing, Inspection, and Certification
+                                (TIC) Market, 2024-2029, Featuring Strategic
+                                Analysis of UL, SGS, Intertek Group, Bureau
+                                Veritas, and DEKRA</a
+                              >
+                            </h4>
+                            <p>
+                              Global Battery Testing, Inspection, and
+                              Certification Market Global Battery Testing,
+                              Inspection, and Certification Market Dublin, Aug.
+                              08, 2024 (GLOBE NEWSWIRE) -- The "Global Battery
+                              Testing, Inspection, and Certification Market by
+                              Battery Type (Lithium-ion, Lead-acid), Standard
+                              and Certification Type (Safety Testing, EMC
+                              Testing), Application (Electric Vehicles, Consumer
+                              Electronics) and Region - Forecast to 2029" report
+                              has been added to ResearchAndMarkets.com\'s
+                              offering.The global battery TI
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/gO59Wk7qVAoQNBVgQ1O1aQ--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/globenewswire.com/eb0782584d84691d73fa3e2429f38012"
+                              alt=""
+                            />
+                          </p>
+                          <div>
+                            <p><span>GlobeNewswire</span></p>
+                            <h4>
+                              <a
+                                data-uuid="44bb95ee-4ee5-3c6d-b90e-2d46a11d705b"
+                                href="https://au.finance.yahoo.com/news/invitation-dfds-q2-2024-conference-091500441.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:11;ct:story;g:44bb95ee-4ee5-3c6d-b90e-2d46a11d705b"
+                                data-hosted-type="HOSTED"
+                                >INVITATION TO DFDS Q2 2024 CONFERENCE CALL</a
+                              >
+                            </h4>
+                            <p>
+                              INVESTOR NEWS no. 57 - 8 August 2024 DFDS expects
+                              to publish the report for Q2 2024 on 14 August
+                              2024 at around 07:30 CET. Torben Carlsen, CEO, and
+                              Karen Boesen, CFO, will present the report on a
+                              live conference call. The presentation will be
+                              followed by a Q&amp;A session. Investors, analysts
+                              and other interested parties are invited to take
+                              part. Conference call Date: 14 August 2024Time:
+                              10:00 CETRegistration: Register ahead of the call
+                              via this link. Access code is mailedafter
+                              registration. Live-st
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/74.0ZPDku15bqtNf9mBUpQ--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/cover_media_989/d95b13aefe6f9aeef5fc485795e64112"
+                              alt=""
+                            /><span
+                              ><svg
+                                width="24"
+                                style="
+                                  fill: #fff;
+                                  stroke: #fff;
+                                  stroke-width: 0;
+                                  vertical-align: bottom;
+                                "
+                                height="26"
+                                viewBox="0 0 512 512"
+                                data-icon="CorePlay"
+                              >
+                                <path
+                                  d="M82.294 490.295c-20.327 11.736-36.952 2.14-36.952-21.332V42.295c0-23.472 16.632-33.055 36.952-21.332L451.67 234.295c20.318 11.75 20.318 30.945 0 42.682L82.294 490.295z"
+                                /></svg
+                            ></span>
+                          </p>
+                          <div>
+                            <p><span>Cover Media</span></p>
+                            <h4>
+                              <a
+                                data-uuid="d132c1fc-0c1e-3ee0-b978-1b1b7f397f5f"
+                                href="https://au.news.yahoo.com/julianne-moore-celebrates-sons-engagement-091500084.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:12;ct:video;g:d132c1fc-0c1e-3ee0-b978-1b1b7f397f5f"
+                                data-hosted-type="HOSTED"
+                                >Julianne Moore celebrates son\'s engagement
+                                news</a
+                              >
+                            </h4>
+                            <p>
+                              On Wednesday, the Oscar-winning actress\'s eldest
+                              child, Caleb Freundlich, announced that he had
+                              recently proposed to his girlfriend Kibriyaá
+                              Morgan. Alongside a series of snaps taken shortly
+                              after he popped the question, Caleb, 26, wrote on
+                              his Instagram, "It\'s pronounced FIANCÉ.". While
+                              in her own post, Kibriyaá added: "The big kids are
+                              getting married!!!! Ahhhhhh I could not love you
+                              more if I tried @cal_freundlich YOU AND ME.".
+                              Reacting to the happy news, Julianne re-posted
+                              some of the sweet snaps. "Congratulations Cal and
+                              Ki. We love you," she added.
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/nhkCmq39PUonmGunwQpwFQ--~B/Zmk9c3RyaW07aD0xNDQ7dz0yNTc7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/business-wire.com/8606e775df28844b1806f738391290c8"
+                              alt=""
+                            />
+                          </p>
+                          <div>
+                            <p><span>Business Wire</span></p>
+                            <h4>
+                              <a
+                                data-uuid="72bdf4c7-b63d-3c36-bdae-b734b6d1509f"
+                                href="https://au.finance.yahoo.com/news/northern-trust-asset-management-strengthens-091400344.html"
+                                data-ylk="elm:hdln;itc:0;pos:1;sec:strm;subsec:moreforyou;cpos:15;ct:story;g:72bdf4c7-b63d-3c36-bdae-b734b6d1509f"
+                                data-hosted-type="HOSTED"
+                                >Northern Trust Asset Management Strengthens
+                                Investment Stewardship Capabilities</a
+                              >
+                            </h4>
+                            <p>
+                              CHICAGO &amp; LONDON, August 08, 2024--Northern
+                              Trust Asset Management (NTAM), a leading global
+                              investment management firm with $1.2 trillion in
+                              assets under management as of June 30, 2024,
+                              announced actions to further strengthen its
+                              investment stewardship capabilities: appointing
+                              Paul Clark as Global Head of Stewardship, and
+                              unveiling the phased rollout of proxy voting
+                              choice.
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li>
+                        <div>
+                          <p>
+                            <img
+                              src="https://s.yimg.com/cv/apiv2/default/20190501/placeholder.gif"
+                              data-wf-src="https://s.yimg.com/uu/api/res/1.2/OydLp5QDsQOy7GKoyctncw--~B/Zmk9c3RyaW07aD0yODg7dz01MTQ7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/huffpost_uk_744/77aa79354d844978317c5232d8e697bb"
+                              alt=""
+                            />
+                          </p>
+                        </div>
+                      </li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                    </ul>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
