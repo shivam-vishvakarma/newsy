@@ -19,7 +19,7 @@ export default async function (_req, context) {
     const result = await res.json();
     const parent_category = document.getElementById("categoryContainer");
     const main_category = parent_category.querySelector("#main_category");
-    result.data.forEach((category) => {
+    result?.data?.forEach((category) => {
       const new_main_category = main_category.cloneNode(true);
       new_main_category.querySelector("h2").innerText = category.name;
       const card_div = new_main_category.querySelector("#card_div");
