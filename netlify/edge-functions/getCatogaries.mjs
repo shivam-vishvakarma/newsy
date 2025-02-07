@@ -26,10 +26,10 @@ export default async function (_req, context) {
       const card = card_div.querySelector("#card");
       category.subtopics.forEach((subtopic) => {
         const new_card = card.cloneNode(true);
-        new_card.querySelector("h5").innerText = subtopic;
+        new_card.querySelector("h5").innerText = subtopic.name;
         new_card.setAttribute(
           "href",
-          `/articles?category=${subtopic.toLowerCase()}`
+          `/articles?category=${subtopic.id}`
         );
         card_div.appendChild(new_card);
       });
